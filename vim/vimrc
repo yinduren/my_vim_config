@@ -1,0 +1,228 @@
+set nocompatible
+
+set runtimepath^=~/.vim/plugin
+
+let mapleader=" "
+
+syntax on
+
+filetype on
+filetype indent on
+filetype plugin on
+filetype plugin indent on
+
+cmap <C-p> <UP>
+
+set encoding=utf-8
+
+let &t_ut=''
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+set backspace=indent,eol,start
+
+"set autochdir
+
+set hlsearch
+set incsearch
+set smartcase
+noremap <LEADER><CR> :nohlsearch<CR>
+
+noremap wp :resize +5<CR>
+noremap ws :resize -5<CR>
+noremap vwp :vertical resize+5<CR>
+noremap vws :vertical resize-5<CR>
+
+" set cursor shape in different mod
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+set noswapfile
+set history=400
+
+set wrap
+set showcmd
+set number
+set nobackup
+set wildmenu
+set ai
+
+map vsr :set splitright<CR>:vsplit<CR>
+map vs :set nosplitright<CR>:vsplit<CR>
+map su :set nosplitbelow<CR>:split<CR>
+map sd :set splitbelow<CR>:split<CR>
+
+map <LEADER>l <C-w>l
+map <LEADER>h <C-w>h
+map <LEADER>j <C-w>j
+map <LEADER>k <C-w>k
+
+map tb :tabedit<CR>
+map tn :-tabnext<CR>
+map tp :+tabnext<CR>
+
+nmap <C-n> <C-f>
+nmap <C-p> <C-b>
+
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+"For count pattern matches number
+nmap ct :%s///gn<cr>
+
+"For search the current selection
+xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
+function! s:VSetSearch()
+	let temp = @s
+	norm! gv"sy
+	let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
+	let @s = temp
+endfunction
+
+"For color hi Comment Ctermfg=6
+
+"Support mouse
+"set mouse=a
+
+"For mini buf explorer
+let g:miniBufExplMapCTabSwitchBufs=1
+let g:miniBufexplMapWindowNavVim=1
+let g:miniBufexplMapWindowNavArrows=1
+let g:miniBufExplModSelTarget=1
+
+"For tag list
+"nmap ts :Tlist<cr>
+"let Tlist_Show_One_File=1
+"let Tlist_Exit_OnlyWindow=1
+"let Tlist_WinWidth=20
+
+"Settings for cscope
+if has("cscope")
+    set csprg=/usr/bin/cscope
+    set csto=0
+    set cst
+    set nocsverb
+
+    " add any database in current directory
+    if filereadable("cscope.out")
+        cscope add cscope.out
+    " else add database pointed to by environment
+    elseif $CSCOPE_DB != ""
+        cscope add $CSCOPE_DB
+    endif
+
+    set csverb
+endif
+
+nmap <C-i>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-i>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-i>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-i>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-i>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-i>f :cs find f <C-R>=expand("<cword>")<CR><CR>
+nmap <C-i>i :cs find i <C-R>=expand("<cword>")<CR><CR>
+nmap <C-i>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+"For search
+nmap <C-\><C-\> :vimgrep <cword> **/*.c **/*.h<CR>:cw<CR>
+nmap <C-\> :vimgrep <cword> %<CR>:cw<CR>
+
+"For json format
+map <F2> :%!python -m json.tool<CR>
+
+"For display with 16
+"%!xxd
+
+"For write with 16
+"%!xxd -r
+
+" for vim-plug 
+call plug#begin('~/.vim/plugged')
+
+Plug 'vim-airline/vim-airline'
+Plug 'connorholyday/vim-snazzy'
+Plug 'ycm-core/YouCompleteMe'
+Plug 'vim-scripts/minibufexpl.vim'
+
+" File navigation
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+"Plug 'majutsushi/tagbar'
+
+Plug 'liuchengxu/vista.vim'
+
+if has('nvim')
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/defx.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+
+call plug#end()
+
+color snazzy
+
+" ===
+" === NERDTree
+" ===
+map tt :NERDTreeToggle<CR>
+" if only nerd tree opened then close VIM
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeDirArrowExpandable='►'
+let g:NERDTreeDirArrowCollapsible='▼'
+let NERDTreeWinSize=20
+let NERDTreeMapOpenExpl=""
+let NERDTreeMapUpdir=""
+let NERDTreeMapUpdirKeepOpen="l"
+let NERDTreeMapOpenSplit=""
+let NERDTreeOpenVSplit=""
+let NERDTreeMapActivateNode="i"
+let NERDTreeMapOpenInTab="o"
+let NERDTreeMapPreview=""
+let NERDTreeMapCloseDir="n"
+let NERDTreeMapChangeRoot="y"
+let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+let g:NERDTreeIndicatorMapCustom={
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+" }}}
+
+" ===
+" === Taglist
+" ===
+nmap ts :TagbarToggle<CR>
+let g:tagbar_width=30
+let g:tagbar_left=1
+
+" ===
+" === Vista
+" ===
+nmap vst :Vista!!<CR>
+let g:vista_sidebar_position = 'vertical top'
+let g:vista_sidebar_width = 20
+let g:vista_ctags_executable = '/usr/bin/ctags'
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filename', 'modified', 'method' ] ]
+      \ },
+      \ 'component_function': {
+      \   'method': 'NearestMethodOrFunction'
+      \ },
+      \ }
