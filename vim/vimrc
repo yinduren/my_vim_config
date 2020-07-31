@@ -11,7 +11,13 @@ filetype indent on
 filetype plugin on
 filetype plugin indent on
 
+set scrolloff=5
+
 cmap <C-p> <UP>
+nmap <C-p> <PageUp>
+
+" Find Duplicate words
+map <LEADER>fd /\(\<\w\+\>\)\_s*\1
 
 set encoding=utf-8
 
@@ -117,6 +123,7 @@ if has("cscope")
     set csverb
 endif
 
+map <LEADER>cs :cs f 
 nmap <C-i>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-i>g :cs find g <C-R>=expand("<cword>")<CR><CR>
 nmap <C-i>c :cs find c <C-R>=expand("<cword>")<CR><CR>
@@ -226,3 +233,4 @@ let g:lightline = {
       \   'method': 'NearestMethodOrFunction'
       \ },
       \ }
+
