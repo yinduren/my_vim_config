@@ -1,11 +1,28 @@
+" reload vimrc when it was modified and saved
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
 set nocompatible
 
 set runtimepath^=~/.vim/plugin
 
-let mapleader=" "
+let mapleader=","
+
+" write file
+nmap <LEADER>w :w<CR>
+nmap <LEADER>q :q<CR>
+
+inoremap <C-j> <Esc>
+" copy and paset
+"vnoremap <LEADER>y "+y
+"nmap <LEADER>p "+p
+
+" go to line head or tail
+nmap H ^
+nmap L $
 
 syntax on
 
+" filetype related
 filetype on
 filetype indent on
 filetype plugin on
@@ -29,11 +46,10 @@ set expandtab
 
 set backspace=indent,eol,start
 
-"set autochdir
-
 set hlsearch
 set incsearch
 set smartcase
+" clear current search highlight
 noremap <LEADER><CR> :nohlsearch<CR>
 
 noremap wp :resize +5<CR>
@@ -153,6 +169,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'connorholyday/vim-snazzy'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'vim-scripts/minibufexpl.vim'
+
+" airline configuration
+let g:airline_left_sep='>'
+let g:airline_right_sep='<'
 
 " File navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
