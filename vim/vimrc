@@ -52,6 +52,11 @@ set smartcase
 " clear current search highlight
 noremap <LEADER><CR> :nohlsearch<CR>
 
+map vsr :set splitright<CR>:vsplit<CR>
+map vs :set nosplitright<CR>:vsplit<CR>
+map su :set nosplitbelow<CR>:split<CR>
+map sd :set splitbelow<CR>:split<CR>
+
 noremap wp :resize +5<CR>
 noremap ws :resize -5<CR>
 noremap vwp :vertical resize+5<CR>
@@ -71,11 +76,6 @@ set number
 set nobackup
 set wildmenu
 set ai
-
-map vsr :set splitright<CR>:vsplit<CR>
-map vs :set nosplitright<CR>:vsplit<CR>
-map su :set nosplitbelow<CR>:split<CR>
-map sd :set splitbelow<CR>:split<CR>
 
 map <LEADER>l <C-w>l
 map <LEADER>h <C-w>h
@@ -166,13 +166,17 @@ map <F2> :%!python -m json.tool<CR>
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'connorholyday/vim-snazzy'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'vim-scripts/minibufexpl.vim'
 
 " airline configuration
-let g:airline_left_sep='>'
-let g:airline_right_sep='<'
+let g:airline_left_sep = '🞂'
+let g:airline_left_alt_sep='>'
+let g:airline_right_sep = '🞀'
+let g:airline_right_alt_sep='<'
+"let g:airline#extensions#tabline#enabled = 1
 
 " File navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
