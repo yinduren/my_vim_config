@@ -1,5 +1,5 @@
 " reload vimrc when it was modified and saved
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
+" autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 set nocompatible
 
@@ -7,11 +7,51 @@ set runtimepath^=~/.vim/plugin
 
 let mapleader=","
 
+" basic settings
+set encoding=utf-8
+set number
+set relativenumber
+set wrap
+set showcmd
+set nobackup
+set wildmenu
+set ai
+set scrolloff=5
+syntax on
+
+" clear current search highlight
+noremap <LEADER><CR> :nohlsearch<CR>
+set hlsearch
+set incsearch
+set smartcase
+
+" filetype related
+filetype on
+filetype indent on
+filetype plugin on
+filetype plugin indent on
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+set noswapfile
+set history=400
+
+set backspace=indent,eol,start
+
+" remap ESC
+inoremap <C-j> <Esc>
+
 " write file
 nmap <LEADER>w :w<CR>
 nmap <LEADER>q :q<CR>
 
-inoremap <C-j> <Esc>
+" change buffer
+nnoremap <silent> bn :bnext<CR>
+nnoremap <silent> bp :bprevious<CR>
+
+
 " copy and paset
 "vnoremap <LEADER>y "+y
 "nmap <LEADER>p "+p
@@ -20,37 +60,17 @@ inoremap <C-j> <Esc>
 nmap H ^
 nmap L $
 
-syntax on
-
-" filetype related
-filetype on
-filetype indent on
-filetype plugin on
-filetype plugin indent on
-
-set scrolloff=5
-
 cmap <C-p> <UP>
 nmap <C-p> <PageUp>
+
+nmap <C-n> <C-f>
+nmap <C-p> <C-b>
+
 
 " Find Duplicate words
 map <LEADER>fd /\(\<\w\+\>\)\_s*\1
 
-set encoding=utf-8
-
 let &t_ut=''
-
-set tabstop=4
-set shiftwidth=4
-set expandtab
-
-set backspace=indent,eol,start
-
-set hlsearch
-set incsearch
-set smartcase
-" clear current search highlight
-noremap <LEADER><CR> :nohlsearch<CR>
 
 map vsr :set splitright<CR>:vsplit<CR>
 map vs :set nosplitright<CR>:vsplit<CR>
@@ -67,16 +87,6 @@ let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
-set noswapfile
-set history=400
-
-set wrap
-set showcmd
-set number
-set nobackup
-set wildmenu
-set ai
-
 map <LEADER>l <C-w>l
 map <LEADER>h <C-w>h
 map <LEADER>j <C-w>j
@@ -85,9 +95,6 @@ map <LEADER>k <C-w>k
 map tb :tabedit<CR>
 map tn :-tabnext<CR>
 map tp :+tabnext<CR>
-
-nmap <C-n> <C-f>
-nmap <C-p> <C-b>
 
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
@@ -139,7 +146,7 @@ if has("cscope")
     set csverb
 endif
 
-map <LEADER>cs :cs f 
+map cs :cs f 
 nmap <C-i>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-i>g :cs find g <C-R>=expand("<cword>")<CR><CR>
 nmap <C-i>c :cs find c <C-R>=expand("<cword>")<CR><CR>
@@ -168,13 +175,16 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'connorholyday/vim-snazzy'
-Plug 'ycm-core/YouCompleteMe'
+"Plug 'ycm-core/YouCompleteMe'
+"Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-scripts/minibufexpl.vim'
 
 " airline configuration
-let g:airline_left_sep = '🞂'
+"let g:airline_left_sep = '🞂'
+let g:airline_left_sep = ''
 let g:airline_left_alt_sep='>'
-let g:airline_right_sep = '🞀'
+let g:airline_right_sep = ''
 let g:airline_right_alt_sep='<'
 "let g:airline#extensions#tabline#enabled = 1
 
