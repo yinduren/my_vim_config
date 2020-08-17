@@ -1,5 +1,5 @@
 " For nodejs
-curl -sL install-node.now.sh | sh
+curl -s https://install-node.now.sh | bash -s
 " For yarn
 curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
 

@@ -7,7 +7,7 @@ set runtimepath^=~/.vim/plugin
 
 let mapleader=","
 
-" basic settings
+" Basic settings
 set encoding=utf-8
 set number
 set relativenumber
@@ -19,13 +19,13 @@ set ai
 set scrolloff=5
 syntax on
 
-" clear current search highlight
+" Clear current search highlight
 noremap <LEADER><CR> :nohlsearch<CR>
 set hlsearch
 set incsearch
 set smartcase
 
-" filetype related
+" Filetype related
 filetype on
 filetype indent on
 filetype plugin on
@@ -40,23 +40,23 @@ set history=400
 
 set backspace=indent,eol,start
 
-" remap ESC
+" Remap ESC
 inoremap <C-j> <Esc>
 
-" write file
+" Write file
 nmap <LEADER>w :w<CR>
 nmap <LEADER>q :q<CR>
 
-" change buffer
+" Change buffer
 nnoremap <silent> bn :bnext<CR>
 nnoremap <silent> bp :bprevious<CR>
 
 
-" copy and paset
+" Copy and paset
 "vnoremap <LEADER>y "+y
 "nmap <LEADER>p "+p
 
-" go to line head or tail
+" Go to line head or tail
 nmap H ^
 nmap L $
 
@@ -82,7 +82,7 @@ noremap ws :resize -5<CR>
 noremap vwp :vertical resize+5<CR>
 noremap vws :vertical resize-5<CR>
 
-" set cursor shape in different mod
+" Set cursor shape in different mod
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
@@ -98,10 +98,10 @@ map tp :+tabnext<CR>
 
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
-"For count pattern matches number
+" For count pattern matches number
 nmap ct :%s///gn<cr>
 
-"For search the current selection
+" For search the current selection
 xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
 function! s:VSetSearch()
@@ -111,9 +111,9 @@ function! s:VSetSearch()
 	let @s = temp
 endfunction
 
-"For color hi Comment Ctermfg=6
+" For color hi Comment Ctermfg=6
 
-"Support mouse
+" Support mouse
 "set mouse=a
 
 "For mini buf explorer
@@ -122,13 +122,13 @@ let g:miniBufexplMapWindowNavVim=1
 let g:miniBufexplMapWindowNavArrows=1
 let g:miniBufExplModSelTarget=1
 
-"For tag list
+" For tag list
 "nmap ts :Tlist<cr>
 "let Tlist_Show_One_File=1
 "let Tlist_Exit_OnlyWindow=1
 "let Tlist_WinWidth=20
 
-"Settings for cscope
+" Settings for cscope
 if has("cscope")
     set csprg=/usr/bin/cscope
     set csto=0
@@ -146,6 +146,7 @@ if has("cscope")
     set csverb
 endif
 
+" For cscope
 map cs :cs f 
 nmap <C-i>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-i>g :cs find g <C-R>=expand("<cword>")<CR><CR>
@@ -156,43 +157,33 @@ nmap <C-i>f :cs find f <C-R>=expand("<cword>")<CR><CR>
 nmap <C-i>i :cs find i <C-R>=expand("<cword>")<CR><CR>
 nmap <C-i>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
-"For search
+" For search
 nmap <C-\><C-\> :vimgrep <cword> **/*.c **/*.h<CR>:cw<CR>
 nmap <C-\> :vimgrep <cword> %<CR>:cw<CR>
 
-"For json format
+" For json format
 map <F2> :%!python -m json.tool<CR>
 
-"For display with 16
+" For display with 16
 "%!xxd
 
-"For write with 16
+" For write with 16
 "%!xxd -r
 
-" for vim-plug 
+" For vim-plug begin
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'connorholyday/vim-snazzy'
-"Plug 'ycm-core/YouCompleteMe'
-"Plug 'neoclide/coc.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-scripts/minibufexpl.vim'
-
-" airline configuration
-"let g:airline_left_sep = '🞂'
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep='>'
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep='<'
-"let g:airline#extensions#tabline#enabled = 1
 
 " File navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-"Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 
 Plug 'liuchengxu/vista.vim'
 
@@ -204,9 +195,12 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-
 call plug#end()
+" For vim-plug end
 
+" ===
+" === snazzy
+" ===
 color snazzy
 
 " ===
@@ -267,4 +261,19 @@ let g:lightline = {
       \   'method': 'NearestMethodOrFunction'
       \ },
       \ }
+
+" ===
+" === coco
+" ===
+let g:coc_disable_startup_warning = 1
+
+" ===
+" === airline
+" ===
+"let g:airline_left_sep = '🞂'
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep='>'
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep='<'
+"let g:airline#extensions#tabline#enabled = 1
 
