@@ -111,7 +111,8 @@ function! s:VSetSearch()
 	let @s = temp
 endfunction
 
-" For color hi Comment Ctermfg=6
+" For color
+hi Comment Ctermfg=6
 
 " Support mouse
 "set mouse=a
@@ -194,6 +195,8 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
+
+Plug 'guns/xterm-color-table.vim'
 
 call plug#end()
 " For vim-plug end
