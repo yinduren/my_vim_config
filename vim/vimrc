@@ -185,7 +185,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Plug 'majutsushi/tagbar'
-
+" Need universal-ctags not support exuberant Ctags
 Plug 'liuchengxu/vista.vim'
 
 if has('nvim')
