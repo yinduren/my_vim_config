@@ -45,16 +45,15 @@ set history=400
 set backspace=indent,eol,start
 
 " Remap ESC
-inoremap <C-j> <Esc>
-cnoremap <C-j> <Esc>
+noremap <C-j> <Esc>
 
 " Write file
 nmap <LEADER>w :w<CR>
 nmap <LEADER>q :q<CR>
 
 " Change buffer
-nnoremap <silent> bn :bnext<CR>
-nnoremap <silent> bp :bprevious<CR>
+nnoremap <silent> <LEADER>bn :bnext<CR>
+nnoremap <silent> <LEADER>bp :bprevious<CR>
 
 
 " Copy and paset
