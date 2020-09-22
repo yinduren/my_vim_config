@@ -24,7 +24,7 @@ syntax on
 set updatetime=100
 
 " highlight 80 colum
-set cc=80
+set cc=120
 
 " Clear current search highlight
 noremap <LEADER><CR> :nohlsearch<CR>
