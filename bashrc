@@ -1,4 +1,5 @@
 export PS1="\[\e[32m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[31m\]\h\[\e[m\]\[\e[35m\]:\[\e[m\]\[\e[36m\]\w\[\e[m\]\[\e[33m\]$\[\e[m\]"
+export LS_COLORS=${LS_COLORS}:di=00\;36:
 
 alias vi='vim'
 alias ls='ls -F --color'
