@@ -213,6 +213,8 @@ if !has('nvim')
     Plug 'rhysd/vim-healthcheck'
 endif
 
+Plug 'gcmt/wildfire.vim'
+
 call plug#end()
 " For vim-plug end
 
